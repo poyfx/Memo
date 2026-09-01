@@ -1,0 +1,6 @@
+.venv/
+.vscode/
+__pycache__/
+*.pyc
+*.db
+memos_backup_*.db

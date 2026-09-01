@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>通知测试</title>
+</head>
+<body>
+  <button id="btn">测试通知</button>
+
+  <script>
+    document.getElementById("btn").addEventListener("click", async () => {
+      const permission = await Notification.requestPermission();
+
+      if (permission === "granted") {
+        new Notification("备忘录提醒", {
+          body: "这是一条测试通知",
+        });
+      } else {
+        alert("通知权限没有打开");
+      }
+    });
+  </script>
+</body>
+</html>
