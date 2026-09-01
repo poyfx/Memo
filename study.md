@@ -151,3 +151,43 @@
 - 不追求一次记住全部
 - 先会用，再慢慢记
 - 每学完一个知识点，都结合项目写一个小例子
+
+
+## 学习阶段记录
+
+日期：2026-09-01
+
+### 已学到的内容
+- FastAPI 最小可运行程序
+- `@app.get()` / `@app.post()` / `@app.put()` / `@app.patch()` / `@app.delete()`
+- `BaseModel` 请求体校验
+- `response_model` 返回值约束
+- `HTTPException` 返回 404
+- SQLite 的增删改查
+- `memos.db` 表结构设计
+- `remind_at` 提醒时间字段
+- `notified` 已提醒字段
+- `/memos/due` 到点提醒查询
+- `GET /memos`、`POST /memos`、`PATCH /memos/{memo_id}`、`PATCH /memos/{memo_id}/done`
+- 错误判断：`422` 多半是请求体，`500` 多半是代码，`404` 多半是路径或数据
+
+### 关键理解
+- FastAPI 负责接口和数据校验
+- SQLite 负责数据持久化
+- `db.py` 负责数据库操作
+- `main.py` 负责路由和 HTTP 错误
+- `schemas.py` 负责请求体和返回体结构
+- `remind_at` 用来表示提醒时间
+- `notified` 用来避免重复提醒
+- `done` 表示任务是否完成
+
+### 目前进度
+- 后端主线已经跑通到“提醒系统基础”
+- 前端和 Tauri 还没有正式开始
+- 目前还没有学 Tauri 项目结构
+
+### 下一步准备学的内容
+- Tauri 项目结构
+- 前端页面最小结构
+- 前端如何调用 FastAPI
+- 系统通知、系统托盘、悬浮球
