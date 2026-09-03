@@ -54,6 +54,11 @@ def read_memos():
     return get_memos()
 
 
+@app.get("/memos/due", response_model=list[MemoRead])
+def read_due_memos():
+    return get_due_memos()
+
+
 @app.get("/memos/{memo_id}", response_model=MemoRead)
 def get_memo(memo_id: int):
     return get_mome_or_404(memo_id)
@@ -100,8 +105,6 @@ def patch_done(memo_id: int, memo: MemoUpdate):
 
 
 # 提醒/状态
-
-
 @app.patch("/memos/{memo_id}/done")
 def update_memo_done(memo_id: int, memo: MemoDoneUpdate):
     affected = set_mome_done(memo_id, int(memo.done))
@@ -116,8 +119,3 @@ def update_memo_notified(memo_id: int):
     if affected == 0:
         raise HTTPException(status_code=404, detail="Memo not found")
     return {"message": "Memo notified"}
-
-
-@app.get("/memos/due", response_model=list[MemoRead])
-def read_due_memos():
-    return get_due_memos()

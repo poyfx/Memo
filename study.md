@@ -33,3 +33,6 @@
 - 再接 `POST /memos`
 - 然后接 `PATCH /memos/{id}` 和 `PATCH /memos/{id}/done`
 - 最后做提醒、托盘、悬浮球
+
+uvicorn memo_backend.main:app --reload
+npx tauri dev

@@ -149,7 +149,7 @@ def get_due_memos():
     now = datetime.now().isoformat()
     cursor.execute(
         """
-        SELECT id,title,done,remind_at FROM memos
+        SELECT id,title,done,remind_at,notified FROM memos
         WHERE done = 0
             AND notified = 0
             AND remind_at IS NOT NULL

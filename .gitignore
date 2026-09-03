@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 *.db
 memos_backup_*.db
+node_modules
