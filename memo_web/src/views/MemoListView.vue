@@ -58,3 +58,63 @@ function handleCreate(payload: { title: string; remind_at: string | null }) {
     </div>
   </section>
 </template>
+
+<style scoped>
+.page {
+  display: grid;
+  gap: 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.panel {
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.panel__title {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.panel__desc {
+  margin: 0;
+  color: var(--text-subtle);
+}
+
+.memo-list {
+  display: grid;
+  gap: 12px;
+}
+
+.kpi {
+  display: grid;
+  gap: 6px;
+}
+
+.kpi__label {
+  color: var(--text-subtle);
+  font-size: 13px;
+}
+
+.kpi__value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+@media (max-width: 960px) {
+  .grid--2 {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

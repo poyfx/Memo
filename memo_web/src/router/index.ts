@@ -4,10 +4,12 @@ import MemoListView from "../views/MemoListView.vue";
 import MemoEditorView from "../views/MemoEditorView.vue";
 import SettingsView from "../views/SettingsView.vue";
 import AboutView from "../views/AboutView.vue";
+import FloatingBallView from "../views/FloatingBallView.vue"
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
+    { path: "/ball", name: "ball", component: FloatingBallView, meta: { title: "悬浮球" } },
     {
       path: "/",
       component: MainLayout,
@@ -42,6 +44,7 @@ const router = createRouter({
         },
       ],
     },
+
   ],
 });
 

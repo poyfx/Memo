@@ -47,3 +47,44 @@ function handleSubmit() {
     <button class="button" type="submit">新增备忘录</button>
   </form>
 </template>
+
+<style scoped>
+.memo-form {
+  display: grid;
+  gap: 14px;
+}
+
+.memo-form__row {
+  display: grid;
+  gap: 12px;
+}
+
+.memo-form__input,
+.memo-form__textarea {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.memo-form__textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--brand);
+  color: #24170f;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+}
+</style>

@@ -32,3 +32,69 @@ const links = [
     </div>
   </aside>
 </template>
+
+<style scoped>
+.sidebar {
+  padding: 28px 22px;
+  background: rgba(0, 0, 0, 0.18);
+  border-right: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  margin-bottom: 28px;
+}
+
+.brand__title {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.02em;
+}
+
+.brand__desc {
+  margin: 8px 0 0;
+  color: var(--text-subtle);
+  font-size: 14px;
+}
+
+.nav {
+  display: grid;
+  gap: 8px;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: var(--text-subtle);
+  background: transparent;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav__link:hover,
+.nav__link.router-link-active {
+  color: var(--text-main);
+  background: rgba(240, 179, 106, 0.12);
+  transform: translateX(2px);
+}
+
+.sidebar__footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-subtle);
+  font-size: 13px;
+}
+
+@media (max-width: 960px) {
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+}
+</style>

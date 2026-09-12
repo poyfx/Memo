@@ -11,3 +11,28 @@
     </div>
   </section>
 </template>
+
+<style scoped>
+.page {
+  display: grid;
+  gap: 20px;
+}
+
+.panel {
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.panel__title {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.panel__desc {
+  margin: 0;
+  color: var(--text-subtle);
+}
+</style>
