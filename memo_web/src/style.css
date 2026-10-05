@@ -15,6 +15,22 @@
   --brand-strong: #ffcd8b;
   --danger: #eb7462;
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+
+  --el-color-primary: #d99a58;
+  --el-color-primary-light-3: #e8b77e;
+  --el-color-primary-light-5: #f0c895;
+  --el-color-primary-light-7: #f6dcc0;
+  --el-color-primary-light-9: #fbf0e4;
+  --el-color-primary-dark-2: #b8793f;
+  --el-bg-color: #1c1816;
+  --el-bg-color-page: #14110f;
+  --el-bg-color-overlay: #24201d;
+  --el-text-color-primary: #f4efe8;
+  --el-text-color-regular: rgba(244, 239, 232, 0.82);
+  --el-text-color-secondary: rgba(244, 239, 232, 0.62);
+  --el-border-color: rgba(255, 255, 255, 0.12);
+  --el-border-color-light: rgba(255, 255, 255, 0.08);
+  --el-fill-color-blank: rgba(255, 255, 255, 0.04);
 }
 
 * {
@@ -42,6 +58,27 @@ textarea {
 button {
   border: 0;
   cursor: pointer;
+}
+
+body:not(.ball-page) {
+  background: var(--bg);
+}
+
+.el-button {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 1px var(--border) inset;
+}
+
+.el-message-box,
+.el-dialog {
+  border-radius: 10px;
 }
 
 input,

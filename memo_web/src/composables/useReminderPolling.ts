@@ -1,17 +1,22 @@
 import { onMounted, onUnmounted } from "vue";
 import { listDueMemos, markMemoNotified } from "../api/memo";
 import { notifyDueMemos } from "../services/desktopNotification";
-
+import { useMemoStore } from "../stores/memo";
 
 const POLLING_INTERVAL_MS = 30_000;
 
-export function useReminderPolling() {
-    let timerId: number | undefined;
-    let chhecking = false;
+ let timerId: number | undefined;
+    let checking  = false;
 
-    async function checkDUeMemos() {
-        if(chhecking) return;
-        chhecking = true;
+export function useReminderPolling() {
+    const memoStore = useMemoStore();
+
+
+   
+
+    async function checkDueMemos() {
+        if(checking ) return;
+        checking  = true;
         try{
             const dueMemos = await listDueMemos();
             if(dueMemos.length === 0) return;
@@ -28,18 +33,18 @@ export function useReminderPolling() {
             await Promise.allSettled(
                 dueMemos.map((memo)=> markMemoNotified(memo.id))
             )
-
+            await memoStore.refreshMemos();
         }catch (error) {
             console.error("检查到期备忘录时出错:", error);
         } finally {
-            chhecking = false;
+            checking  = false;
         }
     }
 
     onMounted(()=>{
-        void checkDUeMemos()
+        void checkDueMemos()
         timerId = window.setInterval(()=>{
-            void checkDUeMemos()
+            void checkDueMemos()
         },POLLING_INTERVAL_MS)
     })
     onUnmounted(()=>{

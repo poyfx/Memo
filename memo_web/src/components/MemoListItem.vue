@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import type { Memo } from "../types/memo";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 defineProps<{
   memo: Memo;
+  removing?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -21,24 +25,33 @@ const emit = defineEmits<{
         </p>
       </div>
 
-      <span class="badge">{{ memo.done ? "已完成" : "待办" }}</span>
+      <el-tag :type="memo.done ? 'success' : 'warning'" effect="plain">
+        {{ memo.done ? "已完成" : "待办" }}
+      </el-tag>
     </div>
 
     <div class="memo-item__actions">
-      <button
-        class="button button--ghost"
-        type="button"
+      <el-button
+        plain
+        @click="router.push({ name: 'editor', query: { id: memo.id } })"
+      >
+        编辑
+      </el-button>
+      <el-button
+        plain
         @click="emit('toggle', memo.id)"
       >
         {{ memo.done ? "撤销完成" : "标记完成" }}
-      </button>
-      <button
-        class="button button--danger"
-        type="button"
+      </el-button>
+      
+      <el-button
+        type="danger"
+        plain
+        :disabled="removing"
         @click="emit('remove', memo.id)"
       >
-        删除
-      </button>
+        {{ removing ? "删除中..." : "删除" }}
+      </el-button>
     </div>
   </article>
 </template>
@@ -81,36 +94,4 @@ const emit = defineEmits<{
   flex-wrap: wrap;
 }
 
-.badge {
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(240, 179, 106, 0.12);
-  color: var(--brand-strong);
-  font-size: 13px;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 0 14px;
-  border-radius: 12px;
-  background: var(--brand);
-  color: #24170f;
-  font-weight: 600;
-  border: 0;
-  cursor: pointer;
-}
-
-.button--ghost {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--text-main);
-}
-
-.button--danger {
-  background: rgba(235, 116, 98, 0.18);
-  color: #ffb0a4;
-}
 </style>

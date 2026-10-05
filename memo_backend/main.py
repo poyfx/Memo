@@ -89,13 +89,19 @@ def edit_memo(memo_id: int, memo: MemoReplace):
 @app.patch("/memos/{memo_id}", response_model=MemoRead)
 def patch_done(memo_id: int, memo: MemoUpdate):
     old_memo = get_memo_by_id(memo_id)
+    if old_memo is None:
+        raise HTTPException(status_code=404, detail="Memo not found")
 
-    new_title = memo.title if memo.title is not None else old_memo["title"]
-    new_done = memo.done if memo.done is not None else old_memo["done"]
+    new_title = memo.title if "title" in memo.model_fields_set else old_memo["title"]
+    new_done = memo.done if "done" in memo.model_fields_set else old_memo["done"]
     new_remind_at = (
-        memo.remind_at if memo.remind_at is not None else old_memo["remind_at"]
+        memo.remind_at
+        if "remind_at" in memo.model_fields_set
+        else old_memo["remind_at"]
     )
-    new_notified = memo.notified if memo.notified is not None else old_memo["notified"]
+    new_notified = (
+        memo.notified if "notified" in memo.model_fields_set else old_memo["notified"]
+    )
     if new_remind_at != old_memo["remind_at"]:
         new_notified = False
 

@@ -21,8 +21,8 @@ const links = [
         :to="link.to"
         class="nav__link"
       >
-        <span>{{ link.label }}</span>
-        <span>›</span>
+        <span class="nav__label">{{ link.label }}</span>
+        <span class="nav__arrow">›</span>
       </RouterLink>
     </nav>
 
@@ -35,8 +35,8 @@ const links = [
 
 <style scoped>
 .sidebar {
-  padding: 28px 22px;
-  background: rgba(0, 0, 0, 0.18);
+  padding: 24px 18px;
+  background: rgba(12, 10, 9, 0.72);
   border-right: 1px solid var(--border);
   backdrop-filter: blur(18px);
 }
@@ -47,8 +47,7 @@ const links = [
 
 .brand__title {
   margin: 0;
-  font-size: 32px;
-  letter-spacing: 0.02em;
+  font-size: 28px;
 }
 
 .brand__desc {
@@ -59,28 +58,32 @@ const links = [
 
 .nav {
   display: grid;
-  gap: 8px;
+  gap: 4px;
 }
 
 .nav__link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 14px;
-  border-radius: 14px;
+  padding: 11px 12px;
+  border-radius: 8px;
   color: var(--text-subtle);
   background: transparent;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .nav__link:hover,
 .nav__link.router-link-active {
   color: var(--text-main);
   background: rgba(240, 179, 106, 0.12);
-  transform: translateX(2px);
+}
+
+.nav__label {
+  font-size: 14px;
+}
+
+.nav__arrow {
+  color: rgba(244, 239, 232, 0.35);
 }
 
 .sidebar__footer {

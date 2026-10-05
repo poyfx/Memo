@@ -1,13 +1,13 @@
 
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
-use tauri::{Manager, WebviewUrl, WebviewWindowBuilder};
+use tauri::{Manager, WebviewUrl, WebviewWindowBuilder,PhysicalPosition,LogicalSize, Size};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
     .plugin(tauri_plugin_notification::init())
-    .invoke_handler(tauri::generate_handler![open_main_window])
+    .invoke_handler(tauri::generate_handler![open_main_window,quit_app])
     .setup(|app| {
         create_ball_window(app.handle())?;
         let open_item = MenuItem::with_id(app, "open", "打开", true, None::<&str>)?;
@@ -43,18 +43,19 @@ pub fn run() {
             Ok(())
         })
         .on_window_event(|window, event| {
-            if window.label() != "main" {
+          if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                if window.label() != "main" {
                 return;
-            }
-            if let tauri::WindowEvent::CloseRequested { api,..} = event {
+                }
+
                 api.prevent_close();
 
                 let app = window.app_handle();
                 let _ = window.hide();
 
-                if let Some(ball) = app.get_webview_window("ball"){
+                if let Some(ball) = app.get_webview_window("ball") {
+                    let _ = ball.set_size(Size::Logical(LogicalSize::new(56.0, 56.0)));
                     let _ = ball.show();
-                    let _ = ball.set_focus();
                 }
             }
         })
@@ -80,6 +81,11 @@ fn open_main_window(app: tauri::AppHandle) -> Result<(), String> {
   Ok(())
 }
 
+#[tauri::command]
+fn quit_app(app: tauri::AppHandle) {
+  app.exit(0);
+}
+
 fn create_ball_window(app: &tauri::AppHandle) -> tauri::Result<()> {
   if app.get_webview_window("ball").is_some() {
     return Ok(());
@@ -95,7 +101,14 @@ fn create_ball_window(app: &tauri::AppHandle) -> tauri::Result<()> {
     .skip_taskbar(true)
     .always_on_top(true)
     .build()?;
+    if let Some(monitor) = ball.current_monitor()? {
+    let screen_size = monitor.size();
 
+    let x = screen_size.width as i32 - 56 - 24;
+    let y = (screen_size.height as i32 - 56) / 2;
+
+    let _ = ball.set_position(PhysicalPosition::new(x, y));
+    }
     let _ = ball.hide();
   Ok(())
 }

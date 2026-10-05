@@ -20,6 +20,7 @@ class MemoUpdate(BaseModel):
     title: str | None = None
     done: bool | None = None
     remind_at: datetime | None = None
+    notified: bool | None = None
 
 
 class MemoDoneUpdate(BaseModel):
